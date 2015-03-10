@@ -1,0 +1,62 @@
+{%extends "blog/base.html"%} 
+
+{%block static%}
+	{%include 'blog/static.html'%}
+{%endblock%}
+
+{%block nav%}
+	{%include 'blog/nav.html'%}				
+{%endblock%}
+
+{%block slider%}
+	{%include 'blog/slider.html'%}				
+{%endblock%}
+
+{%block bloglist%}
+	{% if bloglist %}
+		{% for blog in bloglist %}
+		<article class="uk-article">
+			<h3>
+				<a href="{%url 'blog.views.detail' blogid=blog.id  %}">{{blog.subject}}</a>
+			</h3>
+			<p class="uk-article-meta">时间:{{blog.create_time}} | 标签:{{blog.category.category_name}}</p>
+			<p>{{blog.content | truncatechars:200}}</p>
+			<a href="{%url 'blog.views.detail' blogid=blog.id  %}">Read All >></a>
+		</article>
+		<hr class="uk-article-divider">
+		{% endfor %}
+	{% else %}
+		<div class="uk-panel-box">
+		   	<div class="uk-badge uk-badge-warning">Sorry</div>
+		    <!--  <h3 class="uk-panel-title">Sorry</h3>-->
+		    <p>Bloger is to lazy,he has not create any article about this category! </p>
+		</div>
+	{% endif %}
+	
+	
+	<ul class="uk-pagination uk-pagination-right">
+		{% if bloglist.has_previous %}
+			<li><a href="{% url 'blog.views.index' page=bloglist.previous_page_number %}"><span><i class="uk-icon-angle-double-left"></i></span></a></li>
+		{% else %}
+			<li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+		{% endif %}
+		{% for p in bloglist.paginator.page_range %}
+			{% ifequal p bloglist.number %}
+				<li class="uk-active"><span>{{p}}</a></li>
+			{% else %}
+				<li><a href="?p={{p}}">{{p}}</a></li>
+			{% endifequal %}
+		{% endfor %}
+		
+		{% if bloglist.has_next %}
+			<li><a href="{% url 'blog.views.index' page=bloglist.next_page_number %}"><i class="uk-icon-angle-double-right"></i></a></li>
+		{% else %}
+			<li class="uk-disabled"><span><i class="uk-icon-angle-double-right"></i></span></li>
+		{% endif %}
+	</ul>
+	
+{%endblock%}
+
+{%block footer%}
+	{%include 'blog/footer.html'%}				
+{%endblock%}

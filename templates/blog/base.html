@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html class="uk-notouch">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="chunguang.li">
+<title>myblog</title>
+   {%block static%}
+		
+	{%endblock%}
+</head>
+<body onload="prettyPrint();">
+	<!-- 导航 -->
+	{%block nav%}
+		
+	{%endblock%}
+
+	<!-- main -->
+	<div class="uk-container">
+		<div class="uk-grid">
+			<!-- silder -->
+			<div class="uk-width-medium-1-4">
+				{%block slider%}
+				
+				{%endblock%}
+			</div>
+
+			<div class="uk-width-medium-3-4">
+				{%block bloglist%}
+				
+				{%endblock%}
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

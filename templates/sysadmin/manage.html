@@ -1,0 +1,52 @@
+{%extends "sysadmin/base.html"%} 
+
+{%block static%}
+	{%include 'sysadmin/static.html'%}
+{%endblock%}
+
+{%block nav%}
+	{%include 'sysadmin/nav.html'%}				
+{%endblock%}
+
+{%block slider%}
+	{%include 'sysadmin/slider.html'%}				
+{%endblock%}
+
+{%block bloglist%}
+		<p><a href="{% url 'sysadmin.views.addblog' %}">创建文章</a></p>
+		{{STATIC_URL}}
+		<p><a href="{% url 'sysadmin.views.addcategory' %}">create category</a></p>
+	{% if bloglist %}
+		<table class="uk-table uk-table-striped uk-table-condensed">
+		<thead>
+			<tr><th>category</th><th>subject</th><th>operate</th></tr>
+		</thead>
+		<tbody>
+		{% for blog in bloglist %}
+			<tr>
+			<td class="ui-width-1-10 uk-text-left uk-text-bold">
+			 {{blog.category.category_name}}
+			</td>
+			 <td>
+			<a href="{% url 'sysadmin.views.updateblog' %}?blogid={{blog.id}}">{{blog.subject}} </a>
+			</td>
+			<td>
+			  update|delete
+			</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+		</table>
+	{% endif %}
+	
+	
+	<ul class="uk-pagination">
+		<li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+		<li class="uk-active"><span>1</span></li>
+		<li><a href="#"><i class="uk-icon-angle-double-right"></i></a></li>
+	</ul>
+{%endblock%}
+
+{%block footer%}
+	{%include 'sysadmin/footer.html'%}				
+{%endblock%}

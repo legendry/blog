@@ -1,0 +1,46 @@
+{%extends "blog/base.html"%} 
+
+{%block static%}
+	{%include 'blog/static.html'%}
+{%endblock%}
+
+{%block nav%}
+	{%include 'blog/nav.html'%}				
+{%endblock%}
+
+{%block slider%}
+	{%include 'blog/slider.html'%}				
+{%endblock%}
+
+{%block bloglist%}
+	{% if bloglist %}
+		{% for blog in bloglist %}
+		<article class="uk-article">
+			<h3>
+				<a href="{%url 'blog.views.detail' blogid=blog.id  %}">{{blog.subject}}</a>
+			</h3>
+			<p class="uk-article-meta">时间:{{blog.create_time}} | 标签:{{blog.category.category_name}}</p>
+			<p>{{blog.content | truncatechars:200}}</p>
+			<a href="{%url 'blog.views.detail' blogid=blog.id  %}">Read All >></a>
+		</article>
+		<hr class="uk-article-divider">
+		{% endfor %}
+	{% else %}
+		<div class="uk-panel-box">
+		   	<div class="uk-badge uk-badge-warning">Sorry</div>
+		    <!--  <h3 class="uk-panel-title">Sorry</h3>-->
+		    <p>没有搜到任何与之相关的信息，请更换关键字后重试！</p>
+		</div>
+	{% endif %}
+	
+	
+	<ul class="uk-pagination">
+		<li class="uk-disabled"><span><i class="uk-icon-angle-double-left"></i></span></li>
+		<li class="uk-active"><span>1</span></li>
+		<li><a href="#"><i class="uk-icon-angle-double-right"></i></a></li>
+	</ul>
+{%endblock%}
+
+{%block footer%}
+	{%include 'blog/footer.html'%}				
+{%endblock%}

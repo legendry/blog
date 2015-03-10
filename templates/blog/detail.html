@@ -1,0 +1,35 @@
+{%extends "blog/base.html"%} 
+
+{%block static%}
+	{%include 'blog/static.html'%}
+{%endblock%}
+
+{%block nav%}
+	{%include 'blog/nav.html'%}				
+{%endblock%}
+
+{%block slider%}
+	{%include 'blog/slider.html'%}				
+{%endblock%}
+
+{%block bloglist%}
+	
+	<article class="uk-article">
+			<h3>
+				{{blog.subject}}
+			</h3>
+			<p class="uk-article-meta">时间:{{blog.create_time}} | 标签:{{blog.category.category_name}}</p>
+		</article>
+		{% load mkdown %}
+		{{blog.content | mkdown}}
+		<p>previous:<a href="#">django markdown</a></p>
+		<p>next:<a href="#">django markdown</a><p>
+		<hr class="uk-article-divider">
+		{% load duoshuo_tags %}
+		{% duoshuo_comments  'comments' %}
+		
+{%endblock%}
+
+{%block footer%}
+	{%include 'blog/footer.html'%}				
+{%endblock%}

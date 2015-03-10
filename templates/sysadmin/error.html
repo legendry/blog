@@ -1,0 +1,25 @@
+{%extends "sysadmin/base.html"%} 
+
+{%block static%}
+	{%include 'sysadmin/static.html'%}
+{%endblock%}
+
+{%block nav%}
+	{%include 'sysadmin/nav.html'%}				
+{%endblock%}
+
+{%block slider%}
+	{%include 'sysadmin/slider.html'%}				
+{%endblock%}
+
+{%block bloglist%}
+	<div class="uk-panel-box">
+		   	<div class="uk-badge uk-badge-warning">出错来</div>
+		    <!--  <h3 class="uk-panel-title">Sorry</h3>-->
+		    <p>{{errmsg}}</p>
+		</div>
+{%endblock%}
+
+{%block footer%}
+	{%include 'sysadmin/footer.html'%}				
+{%endblock%}
